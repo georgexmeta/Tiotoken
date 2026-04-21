@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$TIO — TIOSHIELD</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0D0A08;
+  --bg-warm: #1A1208;
+  --gold: #D4A843;
+  --gold-light: #F0CC66;
+  --cream: #F5E6C8;
+  --rust: #C45C2C;
+  --white: #FFFFFF;
+  --muted: #8A7A6A;
+  --border: #2A2218;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+html { scroll-behavior: smooth; }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(212,168,67,0.08) 0%, transparent 60%),
+    var(--bg);
+}
+
+.hero::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(196,92,44,0.06) 0%, transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(240,204,102,0.04) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.mascot {
+  width: min(320px, 60vw);
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.mascot img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.hero-eyebrow {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(5rem, 20vw, 12rem);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  text-shadow: 0 0 60px rgba(212,168,67,0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 span { color: var(--gold); }
+
+.hero-tagline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  letter-spacing: 0.2em;
+  color: var(--rust);
+  margin-top: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-desc {
+  max-width: 500px;
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 2rem auto;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.btn {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+  padding: 0.9rem 2.2rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: inline-block;
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: var(--bg);
+}
+
+.btn-gold:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--border);
+  color: var(--cream);
+}
+
+.btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* STATS BAR */
+.stats-bar {
+  background: var(--bg-warm);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 2rem;
+  text-align: center;
+}
+
+.stat-item .value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.2rem;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+}
+
+.stat-item .label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.3rem;
+}
+
+/* ABOUT */
+.about {
+  padding: 6rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  color: var(--rust);
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  letter-spacing: 0.05em;
+  color: var(--white);
+  margin-bottom: 2rem;
+}
+
+.about p {
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 1.05rem;
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+}
+
+/* ROADMAP */
+.roadmap {
+  padding: 6rem 2rem;
+  background: var(--bg-warm);
+}
+
+.roadmap-inner {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.roadmap-item {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 2rem;
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+
+.roadmap-phase {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  color: var(--rust);
+  padding-top: 0.2rem;
+}
+
+.roadmap-content h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.roadmap-content p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.roadmap-item:last-child { border-bottom: none; }
+
+/* TOKENOMICS */
+.tokenomics {
+  padding: 6rem 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.token-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.token-card {
+  background: var(--bg-warm);
+  border: 1px solid var(--border);
+  padding: 2rem;
+  text-align: left;
+}
+
+.token-card .tc-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.token-card .tc-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+}
+
+.token-card .tc-sub {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 0.3rem;
+}
+
+/* MEMES */
+.memes {
+  padding: 6rem 2rem;
+  background: var(--bg-warm);
+  text-align: center;
+}
+
+.memes-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.meme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.meme-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 2rem;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+  color: var(--cream);
+  line-height: 1.4;
+  transition: border-color 0.2s;
+}
+
+.meme-card:hover { border-color: var(--gold); }
+
+.meme-card span { color: var(--gold); }
+
+/* HOW TO BUY */
+.howto {
+  padding: 6rem 2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  text-align: left;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.5rem;
+  background: var(--bg-warm);
+  border: 1px solid var(--border);
+}
+
+.step-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  color: var(--gold);
+  text-align: center;
+}
+
+.step h4 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  color: var(--white);
+  margin-bottom: 0.3rem;
+}
+
+.step p {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* SOCIAL / FOOTER */
+.footer {
+  padding: 4rem 2rem 3rem;
+  background: var(--bg-warm);
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--gold); }
+
+.footer-copy {
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  margin-top: 1rem;
+  opacity: 0.5;
+}
+
+.disclaimer {
+  font-size: 0.65rem;
+  color: var(--muted);
+  max-width: 500px;
+  margin: 2rem auto 0;
+  line-height: 1.6;
+  opacity: 0.4;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .roadmap-item { grid-template-columns: 1fr; gap: 0.5rem; }
+  .hero { padding: 1.5rem; }
+  .mascot { width: min(260px, 80vw); }
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="mascot">
+    <img src="tio-mascot.jpg" alt="$TIO Mascot">
+  </div>
+  <p class="hero-eyebrow">THE ORIGINAL TIO SHIELD MEMECOIN</p>
+  <h1>$<span>TIO</span></h1>
+  <p class="hero-tagline">TIOSHIELD</p>
+  <p class="hero-desc">The OG meme coin with a shield. Born from the culture, built for the people. $TIO isn't just a token — it's a statement. Hold the shield. Own the moment.</p>
+  <div class="cta-row">
+    <a href="#" class="btn btn-gold">BUY $TIO</a>
+    <a href="#tokenomics" class="btn btn-outline">TOKENOMICS</a>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="value">1B</div>
+    <div class="label">Total Supply</div>
+  </div>
+  <div class="stat-item">
+    <div class="value">0%</div>
+    <div class="label">Tax</div>
+  </div>
+  <div class="stat-item">
+    <div class="value">100%</div>
+    <div class="label">Community</div>
+  </div>
+  <div class="stat-item">
+    <div class="value">LP</div>
+    <div class="label">Burned Forever</div>
+  </div>
+</div>
+
+<section class="about">
+  <p class="section-label">// THE STORY</p>
+  <h2 class="section-title">THE SHIELD SPEAKS</h2>
+  <p>$TIO was born in the trenches. A meme coin forged in chaos, held together by community and good vibes. No VC bags. No team tokens. Just the shield and the people who believe in it.</p>
+  <p>Every holder is part of the movement. Every trade strengthens the shield. This is what decentralization actually looks like.</p>
+</section>
+
+<section class="roadmap">
+  <div class="roadmap-inner">
+    <p class="section-label" style="text-align:center">// THE PATH</p>
+    <h2 class="section-title" style="text-align:center">ROADMAP</h2>
+    <div class="roadmap-item">
+      <div class="roadmap-phase">PHASE 1</div>
+      <div class="roadmap-content">
+        <h3>SHIELD FORMED</h3>
+        <p>Launch. Community building. Organic growth from the trenches. First 1,000 holders.</p>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-phase">PHASE 2</div>
+      <div class="roadmap-content">
+        <h3>SHIELD ACTIVE</h3>
+        <p>CG and CMC listings. Viral memes. TwitterSpaces with the community. Partnerships.</p>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-phase">PHASE 3</div>
+      <div class="roadmap-content">
+        <h3>SHIELD EXPANDS</h3>
+        <p>CEX listings. Merch drop. $TIO NFT collection. Real-world event activations.</p>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-phase">PHASE 4</div>
+      <div class="roadmap-content">
+        <h3>SHIELD ETERNAL</h3>
+        <p>Full autonomy. Community treasury. The shield is forever.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tokenomics" id="tokenomics">
+  <p class="section-label">// THE NUMBERS</p>
+  <h2 class="section-title">TOKENOMICS</h2>
+  <div class="token-grid">
+    <div class="token-card">
+      <div class="tc-label">Token Name</div>
+      <div class="tc-value">TIOSHIELD</div>
+      <div class="tc-sub">$TIO</div>
+    </div>
+    <div class="token-card">
+      <div class="tc-label">Total Supply</div>
+      <div class="tc-value">1,000,000,000</div>
+      <div class="tc-sub">1B tokens</div>
+    </div>
+    <div class="token-card">
+      <div class="tc-label">Network</div>
+      <div class="tc-value">Solana</div>
+      <div class="tc-sub">Fast. Cheap. Real.</div>
+    </div>
+    <div class="token-card">
+      <div class="tc-label">Tax</div>
+      <div class="tc-value">0%</div>
+      <div class="tc-sub">No hidden fees</div>
+    </div>
+    <div class="token-card">
+      <div class="tc-label">LP Burned</div>
+      <div class="tc-value">100%</div>
+      <div class="tc-sub">Locked. Forever.</div>
+    </div>
+    <div class="token-card">
+      <div class="tc-label">Ownership</div>
+      <div class="tc-value">RENOUNCED</div>
+      <div class="tc-sub">No rug. Ever.</div>
+    </div>
+  </div>
+</section>
+
+<section class="memes">
+  <div class="memes-inner">
+    <p class="section-label">// THE VIBES</p>
+    <h2 class="section-title">THE CULTURE</h2>
+    <div class="meme-grid">
+      <div class="meme-card">"The <span>shield</span> doesn't falter."</div>
+      <div class="meme-card">"TIOSHIELD or <span>nothing</span>."</div>
+      <div class="meme-card">"Not your keys, not your <span>shield</span>."</div>
+      <div class="meme-card">"The <span>$TIO</span> way. Always."</div>
+    </div>
+  </div>
+</section>
+
+<section class="howto">
+  <p class="section-label">// GET THE SHIELD</p>
+  <h2 class="section-title">HOW TO BUY</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div>
+        <h4>Get a Wallet</h4>
+        <p>Download Phantom or Backpack. Set it up. Fund it with SOL.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div>
+        <h4>Swap for $TIO</h4>
+        <p>Use Jupiter or Raydium. Paste the $TIO contract address. Swap.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div>
+        <h4>Hold the Shield</h4>
+        <p>Add the token to your wallet. Check the chart. Join the community.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-logo">$<span style="color:var(--gold)">TIO</span></div>
+  <div class="footer-links">
+    <a href="#">Twitter / X</a>
+    <a href="#">Telegram</a>
+    <a href="#">DexScreener</a>
+    <a href="#">CoinGecko</a>
+  </div>
+  <p class="footer-copy">© 2026 TIOSHIELD — ALL RIGHTS BELONG TO THE COMMUNITY</p>
+  <p class="disclaimer">$TIO is a meme coin with no intrinsic value or expectation of financial return. There is no promise of profit. This is for entertainment and cultural purposes only. Always DYOR.</p>
+</footer>
+
+</body>
+</html>
